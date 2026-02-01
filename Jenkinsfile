@@ -2,12 +2,13 @@ pipeline {
     agent any
 
     stages {
+
         stage('Build & Test (main)') {
             when {
                 branch 'main'
             }
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
@@ -16,7 +17,7 @@ pipeline {
                 expression { env.BRANCH_NAME.startsWith('feature') }
             }
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
@@ -25,7 +26,7 @@ pipeline {
                 expression { env.BRANCH_NAME.startsWith('release') }
             }
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
                 echo 'Security scan placeholder'
             }
         }
